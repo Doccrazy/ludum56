@@ -22,8 +22,6 @@ public partial class Enemy : Node
 
 	private AnimationPlayer animationPlayer;
 
-	private bool isMoving = false;
-
 	// Called when the node enters the scene tree for the first time.p
 	public override void _Ready()
 	{
@@ -32,9 +30,13 @@ public partial class Enemy : Node
 			throw new Exception("You must assign a enemy character");
 		}
 
-		target = GetNode<Node3D>("%Player");
+		target = GetNodeOrNull<Node3D>("%Player");
 
-		GD.Print("TARGET NODE: ", target);
+		if (target == null)
+		{
+
+			GD.PushWarning("No target node with %Player found!");
+		}
 
 		animationPlayer = GetNode<AnimationPlayer>("CharacterBody3D/Origin/ShakeWhenMove");
 
@@ -65,10 +67,13 @@ public partial class Enemy : Node
 		}
 
 		enemyCharacter.Velocity = velocity;
-		isMoving = enemyCharacter.MoveAndSlide();
+		enemyCharacter.MoveAndSlide();
 
-		var targetRotation = target.Rotation;
-		enemyCharacter.Rotation = targetRotation;
+		if (target != null)
+		{
+			var targetRotation = target.Rotation;
+			enemyCharacter.Rotation = targetRotation;
+		}
 
 		animationPlayer.Play("Shake", -1, enemyCharacter.Velocity.Length() / 2);
 
