@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://cuitk00xkyf2a"]
+
+[ext_resource type="PackedScene" uid="uid://dujdkmmndwmdk" path="res://Player/Player.tscn" id="1_lnb57"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kqit3"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3fr7r"]
+noise = SubResource("FastNoiseLite_kqit3")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5n3ci"]
+albedo_color = Color(0.396078, 0.705882, 0.0352941, 1)
+albedo_texture = SubResource("NoiseTexture2D_3fr7r")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8dtfu"]
+size = Vector3(10, 0.5, 10)
+
+[node name="Debug" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_lnb57")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="Floor" type="CSGBox3D" parent="StaticBody3D"]
+size = Vector3(10, 0.5, 10)
+material = SubResource("StandardMaterial3D_5n3ci")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_8dtfu")
