@@ -3,90 +3,90 @@ using Godot;
 public partial class Enemy : Node, IDamageable
 {
 	[Export]
-	public bool isActive = false;
+	public bool IsActive = false;
 
 	[Export]
-	public float speed = 3f;
+	public float Speed = 3f;
 
 	[Export]
-	public bool isDead = false;
+	public bool IsDead = false;
 
 	[Export]
-	public int damage = 10;
+	public int Damage = 10;
 
 	[Export]
-	public int life = 100;
+	public int Life = 100;
 
 	[Export]
-	public CharacterBody3D enemyCharacter;
+	public CharacterBody3D EnemyCharacter;
 
 	[Export]
-	public int damageCoolDownTimeInSec = 2;
+	public int DamageCoolDownTimeInSec = 2;
 
-	private Node3D target;
+	private Node3D _target;
 
-	private AnimationPlayer animationPlayer;
+	private AnimationPlayer _animationPlayer;
 
-	private CollisionShape3D collisionShape3D;
+	private CollisionShape3D _collisionShape3D;
 
-	private bool coolDown = false;
+	private bool _coolDown = false;
 
 
 	// Called when the node enters the scene tree for the first time.p
 	public override void _Ready()
 	{
-		if (enemyCharacter == null)
+		if (EnemyCharacter == null)
 		{
 			throw new System.Exception("You must assign a enemy character");
 		}
 
-		target = GetNodeOrNull<Node3D>("%Player");
+		_target = GetNodeOrNull<Node3D>("%Player");
 
-		if (target == null)
+		if (_target == null)
 		{
 
 			GD.PushWarning("No target node with %Player found!");
 		}
 
-		animationPlayer = GetNode<AnimationPlayer>("CharacterBody3D/Origin/ShakeWhenMove");
-		collisionShape3D = GetNode<CollisionShape3D>("CharacterBody3D/CollisionShape3D");
+		_animationPlayer = GetNode<AnimationPlayer>("CharacterBody3D/Origin/ShakeWhenMove");
+		_collisionShape3D = GetNode<CollisionShape3D>("CharacterBody3D/CollisionShape3D");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
-		Vector3 velocity = enemyCharacter.Velocity;
+		Vector3 velocity = EnemyCharacter.Velocity;
 		// Give the enemy char some gravity
-		if (!enemyCharacter.IsOnFloor())
+		if (!EnemyCharacter.IsOnFloor())
 		{
-			velocity += enemyCharacter.GetGravity() * (float)delta;
+			velocity += EnemyCharacter.GetGravity() * (float)delta;
 		}
 
 		// If an target exists then flow this target
-		if (target != null && !isDead)
+		if (_target != null && !IsDead)
 		{
-			var targetPos = target.GlobalPosition;
-			var enemyPos = enemyCharacter.GlobalPosition;
+			var targetPos = _target.GlobalPosition;
+			var enemyPos = EnemyCharacter.GlobalPosition;
 
 
 			var moveVector = enemyPos.DirectionTo(targetPos);
-			var moveVelocity = moveVector * speed;
+			var moveVelocity = moveVector * Speed;
 
 			velocity.X = moveVelocity.X;
 			velocity.Z = moveVelocity.Z;
 		}
 
-		enemyCharacter.Velocity = velocity;
+		EnemyCharacter.Velocity = velocity;
 
-		if (target != null)
+		if (_target != null)
 		{
-			var targetRotation = target.Rotation;
-			enemyCharacter.Rotation = targetRotation;
+			var targetRotation = _target.Rotation;
+			EnemyCharacter.Rotation = targetRotation;
 		}
 
-		enemyCharacter.MoveAndSlide();
+		EnemyCharacter.MoveAndSlide();
 
-		animationPlayer.Play("Shake", -1, velocity.Length() / 2);
+		_animationPlayer.Play("Shake", -1, velocity.Length() / 2);
 
 		CheckCollision();
 
@@ -94,36 +94,36 @@ public partial class Enemy : Node, IDamageable
 
 	public void TakeDamage(int amount)
 	{
-		if (life >= amount)
+		if (Life >= amount)
 		{
-			life -= amount;
+			Life -= amount;
 		}
 		else
 		{
-			life = 0;
+			Life = 0;
 			QueueFree();
 		}
 	}
 
 	public void CheckCollision()
 	{
-		var collisionCount = enemyCharacter.GetSlideCollisionCount();
+		var collisionCount = EnemyCharacter.GetSlideCollisionCount();
 		if (collisionCount > 0)
 		{
 
 			for (int i = 0; i < collisionCount; i++)
 			{
-				var collision = enemyCharacter.GetSlideCollision(i);
+				var collision = EnemyCharacter.GetSlideCollision(i);
 
 				var node = collision.GetCollider();
 
 				if (node != null && node is Player)
 				{
 					var player = (Player)node;
-					if (!coolDown)
+					if (!_coolDown)
 					{
-						coolDown = true;
-						player.TakeDamage(damage);
+						_coolDown = true;
+						player.TakeDamage(Damage);
 						DisableCoolDownAsync();
 					}
 				}
@@ -136,7 +136,7 @@ public partial class Enemy : Node, IDamageable
 		Timer timer = new Timer();
 
 		AddChild(timer);
-		timer.WaitTime = damageCoolDownTimeInSec;
+		timer.WaitTime = DamageCoolDownTimeInSec;
 
 		timer.OneShot = true;
 
@@ -144,7 +144,7 @@ public partial class Enemy : Node, IDamageable
 
 		await ToSignal(timer, "timeout");
 
-		coolDown = false;
+		_coolDown = false;
 		timer.QueueFree();
 
 	}
