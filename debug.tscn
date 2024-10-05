@@ -1,28 +1,44 @@
-[gd_scene load_steps=6 format=3 uid="uid://cuitk00xkyf2a"]
+[gd_scene load_steps=8 format=3 uid="uid://cuitk00xkyf2a"]
 
 [ext_resource type="PackedScene" uid="uid://dujdkmmndwmdk" path="res://Player/Player.tscn" id="1_lnb57"]
+[ext_resource type="PackedScene" uid="uid://cd8t5107s5nyj" path="res://Enemy/Scenes/Enemy.tscn" id="2_bmey0"]
+
+[sub_resource type="Gradient" id="Gradient_gm5hy"]
+colors = PackedColorArray(0.384314, 0.227451, 0.0352941, 1, 0.529412, 0.756863, 0, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_kqit3"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3fr7r"]
+width = 1024
+height = 1024
+color_ramp = SubResource("Gradient_gm5hy")
 noise = SubResource("FastNoiseLite_kqit3")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5n3ci"]
-albedo_color = Color(0.396078, 0.705882, 0.0352941, 1)
 albedo_texture = SubResource("NoiseTexture2D_3fr7r")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8dtfu"]
-size = Vector3(10, 0.5, 10)
+size = Vector3(20, 0.5, 20)
 
 [node name="Debug" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("1_lnb57")]
+unique_name_in_owner = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
 [node name="Floor" type="CSGBox3D" parent="StaticBody3D"]
-size = Vector3(10, 0.5, 10)
+size = Vector3(20, 0.5, 20)
 material = SubResource("StandardMaterial3D_5n3ci")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_8dtfu")
+
+[node name="Enemy" parent="." instance=ExtResource("2_bmey0")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 1.65017, 0.227323, 0)
+speed = 2.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.747311, 0.664474, 0, -0.664474, 0.747311, 0, 3.65009, 0)
+light_energy = 0.353
+shadow_enabled = true
