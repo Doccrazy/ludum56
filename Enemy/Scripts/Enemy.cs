@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 public partial class Enemy : Node, IDamageable
 {
@@ -27,6 +29,10 @@ public partial class Enemy : Node, IDamageable
 
 	private CollisionShape3D collisionShape3D;
 
+	private bool coolDown = false;
+
+	private int coolDownTimeInSec = 3;
+
 	// Called when the node enters the scene tree for the first time.p
 	public override void _Ready()
 	{
@@ -45,7 +51,6 @@ public partial class Enemy : Node, IDamageable
 
 		animationPlayer = GetNode<AnimationPlayer>("CharacterBody3D/Origin/ShakeWhenMove");
 		collisionShape3D = GetNode<CollisionShape3D>("CharacterBody3D/CollisionShape3D");
-
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -102,7 +107,6 @@ public partial class Enemy : Node, IDamageable
 		}
 	}
 
-
 	public void CheckCollision()
 	{
 		var collisionCount = enemyCharacter.GetSlideCollisionCount();
@@ -118,12 +122,27 @@ public partial class Enemy : Node, IDamageable
 				if (node != null && node is Player)
 				{
 					var player = (Player)node;
+					GD.Print("COOL DOWN", coolDown);
 
-					player.TakeDamage(damage);
+					if (!coolDown)
+					{
+						coolDown = true;
+						player.TakeDamage(damage);
+						var task = Task.Run(() => DisableCoolDown());
+						task.Wait(TimeSpan.FromSeconds(10));
+					}
+
+
 				}
 
 			}
 
 		}
+	}
+
+	public void DisableCoolDown()
+	{
+		GD.Print("COOLDOWN OVER");
+		coolDown = false;
 	}
 }
