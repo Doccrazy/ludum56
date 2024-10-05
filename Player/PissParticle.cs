@@ -8,6 +8,8 @@ public partial class PissParticle : RigidBody3D
 	public Node3D Trail;
 	[Export]
 	public PackedScene DecalScene;
+	[Export]
+	public int Damage = 10;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -54,6 +56,14 @@ public partial class PissParticle : RigidBody3D
 				decal.GlobalRotation = collision.GetNormal();
 				decal.RotateY(GD.Randf() * Mathf.Pi);
 			}
+		}
+		else if (body is IDamageable)
+		{
+			(body as IDamageable).TakeDamage(Damage);
+		}
+		else if (body.GetParent() is IDamageable)
+		{
+			body.GetParent<IDamageable>().TakeDamage(Damage);
 		}
 		QueueFree();
 	}
