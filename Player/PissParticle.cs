@@ -28,9 +28,24 @@ public partial class PissParticle : RigidBody3D
 			scale.Z = dist.Length();
 			if (scale.Z > 0)
 			{
-				Trail.GlobalTransform = GlobalTransform.LookingAt(TrailTarget.GlobalPosition);
+				Trail.GlobalTransform = GlobalTransform.LookingAt(TrailTarget.GlobalPosition, Perpendicular(dist));
 				Trail.Scale = scale;
 			}
 		}
+	}
+
+	public void OnTimerTimeout()
+	{
+		QueueFree();
+	}
+
+	public void OnBodyEntered(Node3D body)
+	{
+		QueueFree();
+	}
+
+	private static Vector3 Perpendicular(Vector3 orig)
+	{
+		return orig.Z < orig.X ? new Vector3(orig.Y, -orig.X, 0) : new Vector3(0, -orig.Z, orig.Y);
 	}
 }
