@@ -1,7 +1,4 @@
 using Godot;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 
 public partial class Enemy : Node, IDamageable
 {
@@ -31,14 +28,14 @@ public partial class Enemy : Node, IDamageable
 
 	private bool coolDown = false;
 
-	private int coolDownTimeInSec = 3;
+	private int coolDownTimeInSec = 2;
 
 	// Called when the node enters the scene tree for the first time.p
 	public override void _Ready()
 	{
 		if (enemyCharacter == null)
 		{
-			throw new Exception("You must assign a enemy character");
+			throw new System.Exception("You must assign a enemy character");
 		}
 
 		target = GetNodeOrNull<Node3D>("%Player");
@@ -122,14 +119,11 @@ public partial class Enemy : Node, IDamageable
 				if (node != null && node is Player)
 				{
 					var player = (Player)node;
-					GD.Print("COOL DOWN", coolDown);
-
 					if (!coolDown)
 					{
 						coolDown = true;
 						player.TakeDamage(damage);
-						var task = Task.Run(() => DisableCoolDown());
-						task.Wait(TimeSpan.FromSeconds(10));
+						DisableCoolDownAsync();
 					}
 
 
@@ -140,9 +134,21 @@ public partial class Enemy : Node, IDamageable
 		}
 	}
 
-	public void DisableCoolDown()
+	public async void DisableCoolDownAsync()
 	{
-		GD.Print("COOLDOWN OVER");
+		Timer timer = new Timer();
+
+		AddChild(timer);
+		timer.WaitTime = coolDownTimeInSec;
+
+		timer.OneShot = true;
+
+		timer.Start();
+
+		await ToSignal(timer, "timeout");
+
 		coolDown = false;
+		timer.QueueFree();
+
 	}
 }
