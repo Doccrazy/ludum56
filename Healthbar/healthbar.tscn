@@ -1,0 +1,58 @@
+[gd_scene load_steps=14 format=3 uid="uid://7egb2y02rqy1"]
+
+[ext_resource type="Script" path="res://Healthbar/Healthbar.cs" id="1_pncty"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_tem2n"]
+size = Vector2(512, 512)
+
+[sub_resource type="Gradient" id="Gradient_57pfj"]
+colors = PackedColorArray(0.360784, 0.823529, 0, 1, 0, 0.447059, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6vti3"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vvodh"]
+color_ramp = SubResource("Gradient_57pfj")
+noise = SubResource("FastNoiseLite_6vti3")
+
+[sub_resource type="Gradient" id="Gradient_ormnx"]
+colors = PackedColorArray(1, 1, 0, 1, 0.512232, 0.512232, 3.85046e-07, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qg3fq"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3fvj7"]
+color_ramp = SubResource("Gradient_ormnx")
+noise = SubResource("FastNoiseLite_qg3fq")
+
+[sub_resource type="Gradient" id="Gradient_j0krg"]
+colors = PackedColorArray(1, 0, 0, 1, 0.419608, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xxl5o"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vw1ef"]
+color_ramp = SubResource("Gradient_j0krg")
+noise = SubResource("FastNoiseLite_xxl5o")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_crjs2"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5qc80"]
+noise = SubResource("FastNoiseLite_crjs2")
+
+[node name="Healthbar" type="Sprite3D"]
+offset = Vector2(0, 2000)
+pixel_size = 0.001
+billboard = 1
+texture = SubResource("PlaceholderTexture2D_tem2n")
+script = ExtResource("1_pncty")
+BarGreen = SubResource("NoiseTexture2D_vvodh")
+BarYellow = SubResource("NoiseTexture2D_3fvj7")
+BarRed = SubResource("NoiseTexture2D_vw1ef")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="SubViewport"]
+offset_right = 40.0
+offset_bottom = 40.0
+value = 100.0
+texture_progress = SubResource("NoiseTexture2D_5qc80")

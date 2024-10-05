@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dujdkmmndwmdk"]
+[gd_scene load_steps=6 format=3 uid="uid://dujdkmmndwmdk"]
 
 [ext_resource type="Script" path="res://Player/Player.cs" id="1_f4gqq"]
 [ext_resource type="Script" path="res://Player/PissEmitter.cs" id="2_un6dm"]
 [ext_resource type="PackedScene" uid="uid://bxvpq4lxj2j2m" path="res://Player/piss_particle.tscn" id="3_glep1"]
+[ext_resource type="PackedScene" uid="uid://7egb2y02rqy1" path="res://Healthbar/healthbar.tscn" id="4_3k7ej"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_euugb"]
 radius = 0.25
@@ -38,5 +39,8 @@ PissParticleScene = ExtResource("3_glep1")
 process_callback = 0
 wait_time = 0.1
 autostart = true
+
+[node name="Healthbar" parent="." instance=ExtResource("4_3k7ej")]
+transform = Transform3D(1, 0, 0, 0, 0.15, 0, 0, 0, 1, 0, 0.45, 0)
 
 [connection signal="timeout" from="PissEmitter/Timer" to="PissEmitter" method="OnTimerTimeout"]
