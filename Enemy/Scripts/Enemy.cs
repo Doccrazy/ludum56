@@ -22,7 +22,6 @@ public partial class Enemy : Node
 
 	private AnimationPlayer animationPlayer;
 
-
 	private bool isMoving = false;
 
 	// Called when the node enters the scene tree for the first time.p
@@ -40,9 +39,6 @@ public partial class Enemy : Node
 		animationPlayer = GetNode<AnimationPlayer>("CharacterBody3D/Origin/ShakeWhenMove");
 
 	}
-
-
-
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
