@@ -60,7 +60,6 @@ public partial class Enemy : Node, IDamageable
 			velocity += enemyCharacter.GetGravity() * (float)delta;
 		}
 
-
 		// If an target exists then flow this target
 		if (target != null && !isDead)
 		{
@@ -82,7 +81,6 @@ public partial class Enemy : Node, IDamageable
 			var targetRotation = target.Rotation;
 			enemyCharacter.Rotation = targetRotation;
 		}
-
 
 		enemyCharacter.MoveAndSlide();
 
@@ -125,12 +123,8 @@ public partial class Enemy : Node, IDamageable
 						player.TakeDamage(damage);
 						DisableCoolDownAsync();
 					}
-
-
 				}
-
 			}
-
 		}
 	}
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cd8t5107s5nyj"]
+[gd_scene load_steps=8 format=3 uid="uid://cd8t5107s5nyj"]
 
 [ext_resource type="Script" path="res://Enemy/Scripts/Enemy.cs" id="1_wh4q1"]
 
@@ -70,8 +70,6 @@ albedo_color = Color(0.926065, 0.0655792, 1.92523e-07, 1)
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_be3fb"]
 material = SubResource("StandardMaterial3D_ey3en")
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x73t8"]
-
 [node name="Enemy" type="Node3D" node_paths=PackedStringArray("enemyCharacter")]
 script = ExtResource("1_wh4q1")
 enemyCharacter = NodePath("CharacterBody3D")
@@ -94,9 +92,3 @@ libraries = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_be3fb")
 skeleton = NodePath("../../..")
-
-[node name="Area3D" type="Area3D" parent="CharacterBody3D"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_x73t8")
