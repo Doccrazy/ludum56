@@ -6,9 +6,16 @@ public partial class Player : CharacterBody3D
 	public const float Speed = 5.0f;
 	public const float JumpVelocity = 4.5f;
 	private readonly float RotateSpeed = Mathf.DegToRad(-90.0f);
+	[Export]
+	public Node Weapon; // IWeapon
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if (Weapon != null)
+		{
+			(Weapon as IWeapon).Emitting = Input.IsActionPressed("fire");
+		}
+
 		Vector3 velocity = Velocity;
 
 		// Add the gravity.
