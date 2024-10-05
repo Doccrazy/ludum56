@@ -1,4 +1,4 @@
-interface Damageable
+interface IDamageable
 {
     void TakeDamage(int amount);
 }

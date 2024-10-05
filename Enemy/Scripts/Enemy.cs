@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Enemy : Node, Damageable
+public partial class Enemy : Node, IDamageable
 {
 	[Export]
 	public bool isActive = false;
