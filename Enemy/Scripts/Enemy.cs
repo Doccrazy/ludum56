@@ -101,6 +101,7 @@ public partial class Enemy : Node, IDamageable
 		else
 		{
 			life = 0;
+			QueueFree();
 		}
 	}
 

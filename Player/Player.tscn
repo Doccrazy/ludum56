@@ -25,9 +25,12 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3.7
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
+light_color = Color(0.982632, 0.0643041, 1, 1)
+light_energy = 2.454
+shadow_enabled = true
 
 [node name="PissEmitter" type="Node3D" parent="."]
-transform = Transform3D(-4.37114e-08, -0.586726, 0.809786, 1.77636e-15, 0.809786, 0.586726, -1, 2.56466e-08, -3.53969e-08, 0.225069, 0.141793, 0)
+transform = Transform3D(-4.37114e-08, -0.358173, 0.933656, 1.77636e-15, 0.933656, 0.358173, -1, 1.56562e-08, -4.08114e-08, 0.225069, 0.141793, 0)
 script = ExtResource("2_un6dm")
 PissParticleScene = ExtResource("3_glep1")
 

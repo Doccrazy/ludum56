@@ -10,6 +10,9 @@ public partial class Player : CharacterBody3D, IDamageable
 	[Export]
 	public Node Weapon; // IWeapon
 
+	[Export]
+	public int Life = 100;
+
 	public override void _PhysicsProcess(double delta)
 	{
 		var isFiring = Input.IsActionPressed("fire");
@@ -62,5 +65,10 @@ public partial class Player : CharacterBody3D, IDamageable
 	{
 		// TODO TAKE DAMAGE
 		GD.Print("DAMAGE TAKEN: ", damage);
+		Life = Math.Max(Life - damage, 0);
+		if (Life <= 0)
+		{
+			QueueFree();
+		}
 	}
 }
