@@ -14,8 +14,9 @@ public partial class Enemy : Node, IDamageable
 	[Export]
 	public int Damage = 10;
 
+	public int Life { get; private set; }
 	[Export]
-	public int Life = 100;
+	public int MaxLife { get; set; } = 100;
 
 	[Export]
 	public CharacterBody3D EnemyCharacter;
@@ -35,6 +36,7 @@ public partial class Enemy : Node, IDamageable
 	// Called when the node enters the scene tree for the first time.p
 	public override void _Ready()
 	{
+		Life = MaxLife;
 		if (EnemyCharacter == null)
 		{
 			throw new System.Exception("You must assign a enemy character");

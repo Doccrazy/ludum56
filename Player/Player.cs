@@ -1,4 +1,5 @@
 using Godot;
+
 using System;
 
 public partial class Player : CharacterBody3D, IDamageable
@@ -6,12 +7,18 @@ public partial class Player : CharacterBody3D, IDamageable
 	public const float Speed = 5.0f;
 	public const float FireSpeedFactor = 0.5f;
 	public const float JumpVelocity = 4.5f;
-	private readonly float RotateSpeed = Mathf.DegToRad(-90.0f);
+	public readonly float RotateSpeed = Mathf.DegToRad(-90.0f);
 	[Export]
 	public Node Weapon; // IWeapon
 
+	public int Life { get; private set; }
 	[Export]
-	public int Life = 100;
+	public int MaxLife { get; set; } = 100;
+
+	public override void _Ready()
+	{
+		Life = MaxLife;
+	}
 
 	public override void _PhysicsProcess(double delta)
 	{

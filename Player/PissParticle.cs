@@ -25,7 +25,7 @@ public partial class PissParticle : RigidBody3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (Trail != null && TrailTarget != null)
+		if (Trail != null && TrailTarget != null && IsInstanceValid(TrailTarget))
 		{
 			var dist = GlobalPosition - TrailTarget.GlobalPosition;
 			var scale = Trail.Scale;
