@@ -1,14 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://dujdkmmndwmdk"]
+[gd_scene load_steps=5 format=3 uid="uid://dujdkmmndwmdk"]
 
 [ext_resource type="Script" path="res://Player/Player.cs" id="1_f4gqq"]
+[ext_resource type="Script" path="res://Player/PissEmitter.cs" id="2_un6dm"]
+[ext_resource type="PackedScene" uid="uid://bxvpq4lxj2j2m" path="res://Player/piss_particle.tscn" id="3_glep1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_euugb"]
 radius = 0.25
 height = 1.0
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("Weapon")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.475369, 0)
+collision_layer = 2
 script = ExtResource("1_f4gqq")
+Weapon = NodePath("PissEmitter")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.0263165, -0.999654, 0, 0.999654, -0.0263165, 0, 0, 0)
@@ -21,3 +25,15 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3.7
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
+
+[node name="PissEmitter" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, -0.586726, 0.809786, 1.77636e-15, 0.809786, 0.586726, -1, 2.56466e-08, -3.53969e-08, 0.225069, 0.141793, 0)
+script = ExtResource("2_un6dm")
+PissParticleScene = ExtResource("3_glep1")
+
+[node name="Timer" type="Timer" parent="PissEmitter"]
+process_callback = 0
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="PissEmitter/Timer" to="PissEmitter" method="OnTimerTimeout"]
