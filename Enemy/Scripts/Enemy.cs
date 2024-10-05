@@ -58,6 +58,7 @@ public partial class Enemy : Node, Damageable
 			velocity += enemyCharacter.GetGravity() * (float)delta;
 		}
 
+
 		// If an target exists then flow this target
 		if (target != null && !isDead)
 		{
@@ -80,11 +81,12 @@ public partial class Enemy : Node, Damageable
 			enemyCharacter.Rotation = targetRotation;
 		}
 
-		animationPlayer.Play("Shake", -1, enemyCharacter.Velocity.Length() / 2);
 
 		enemyCharacter.MoveAndSlide();
 
+		animationPlayer.Play("Shake", -1, velocity.Length() / 2);
 
+		CheckCollision();
 
 	}
 
@@ -107,13 +109,13 @@ public partial class Enemy : Node, Damageable
 		if (collisionCount > 0)
 		{
 
-			for (int i = 0; i <= collisionCount; i++)
+			for (int i = 0; i < collisionCount; i++)
 			{
 				var collision = enemyCharacter.GetSlideCollision(i);
 
 				var node = collision.GetCollider();
 
-				if (node is Player)
+				if (node != null && node is Player)
 				{
 					var player = (Player)node;
 

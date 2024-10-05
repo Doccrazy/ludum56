@@ -50,5 +50,6 @@ public partial class Player : CharacterBody3D, Damageable
 	public void TakeDamage(int damage)
 	{
 		// TODO TAKE DAMAGE
+		GD.Print("DAMAGE TAKEN: ", damage);
 	}
 }
