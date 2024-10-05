@@ -20,6 +20,9 @@ public partial class Enemy : Node, IDamageable
 	[Export]
 	public CharacterBody3D enemyCharacter;
 
+	[Export]
+	public int damageCoolDownTimeInSec = 2;
+
 	private Node3D target;
 
 	private AnimationPlayer animationPlayer;
@@ -28,7 +31,6 @@ public partial class Enemy : Node, IDamageable
 
 	private bool coolDown = false;
 
-	private int coolDownTimeInSec = 2;
 
 	// Called when the node enters the scene tree for the first time.p
 	public override void _Ready()
@@ -133,7 +135,7 @@ public partial class Enemy : Node, IDamageable
 		Timer timer = new Timer();
 
 		AddChild(timer);
-		timer.WaitTime = coolDownTimeInSec;
+		timer.WaitTime = damageCoolDownTimeInSec;
 
 		timer.OneShot = true;
 
