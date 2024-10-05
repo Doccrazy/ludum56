@@ -6,6 +6,8 @@ public partial class PissParticle : RigidBody3D
 	public Node3D TrailTarget;
 	[Export]
 	public Node3D Trail;
+	[Export]
+	public PackedScene DecalScene;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -39,8 +41,20 @@ public partial class PissParticle : RigidBody3D
 		QueueFree();
 	}
 
-	public void OnBodyEntered(Node3D body)
+	public void OnBodyEntered(Node body)
 	{
+		if (body is StaticBody3D)
+		{
+			var collision = new KinematicCollision3D();
+			if (TestMove(GlobalTransform, Vector3.Zero, collision, 0.001f, true))
+			{
+				var decal = DecalScene.Instantiate<Node3D>();
+				body.AddChild(decal);
+				decal.GlobalPosition = collision.GetPosition();
+				decal.GlobalRotation = collision.GetNormal();
+				decal.RotateY(GD.Randf() * Mathf.Pi);
+			}
+		}
 		QueueFree();
 	}
 
