@@ -4,30 +4,57 @@ using System;
 public partial class Enemy : Node
 {
 	[Export]
-	protected bool isActive = false;
+	public bool isActive = false;
 
 	[Export]
-	protected int speed = 10;
+	public float speed = 3f;
 
 	[Export]
-	protected bool isDead = false;
+	public bool isDead = false;
 
 	[Export]
-	protected float damage = 10f;
+	public float damage = 10f;
 
 	[Export]
-	protected CharacterBody3D character;
+	public CharacterBody3D enemyCharacter;
 
+	[Export]
+	public Node3D target;
 
 	// Called when the node enters the scene tree for the first time.p
 	public override void _Ready()
 	{
+		if (enemyCharacter == null)
+		{
+			throw new Exception("You must assign a enemy character");
+		}
 
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
+		var velocity = enemyCharacter.Velocity;
+		// Give the enemy char some gravity
+		if (!enemyCharacter.IsOnFloor())
+		{
+			velocity += enemyCharacter.GetGravity() * (float)delta;
+		}
 
+		// If an target exists then flow this target
+		if (target != null && !isDead)
+		{
+			var targetPos = target.GlobalPosition;
+			var enemyPos = enemyCharacter.GlobalPosition;
+
+			var moveVector = enemyPos.DirectionTo(targetPos);
+			var moveVelocity = moveVector * speed;
+
+			velocity.X = moveVelocity.X;
+			velocity.Z = moveVelocity.Z;
+		}
+
+		enemyCharacter.Velocity = velocity;
+		enemyCharacter.MoveAndSlide();
 	}
 }

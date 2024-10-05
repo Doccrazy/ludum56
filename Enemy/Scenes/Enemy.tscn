@@ -10,9 +10,9 @@ material = SubResource("StandardMaterial3D_ey3en")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ypuli"]
 
-[node name="Enemy" type="Node3D" node_paths=PackedStringArray("character")]
+[node name="Enemy" type="Node3D" node_paths=PackedStringArray("enemyCharacter")]
 script = ExtResource("1_wh4q1")
-character = NodePath("CharacterBody3D")
+enemyCharacter = NodePath("CharacterBody3D")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 
