@@ -21,6 +21,6 @@ public partial class Spawner : Node
 
 	public void SpawnElements()
 	{
-		_spawnArea.
+
 	}
 }
