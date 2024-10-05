@@ -18,7 +18,6 @@ public partial class Enemy : Node
 	[Export]
 	public CharacterBody3D enemyCharacter;
 
-	[Export]
 	public Node3D target;
 
 	// Called when the node enters the scene tree for the first time.p
@@ -29,7 +28,14 @@ public partial class Enemy : Node
 			throw new Exception("You must assign a enemy character");
 		}
 
+		target = GetNode<Node3D>("%Player");
+
+		GD.Print("TARGET NODE: ", target);
+
 	}
+
+
+
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)

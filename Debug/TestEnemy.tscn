@@ -23,13 +23,12 @@ shape = SubResource("BoxShape3D_sdthd")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PlayGround"]
 mesh = SubResource("BoxMesh_yibf4")
 
-[node name="Enemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("1_g0shm")]
+[node name="Enemy" parent="." instance=ExtResource("1_g0shm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11223, 3.44397, -4.08483)
-isDead = true
-target = NodePath("../Player")
 
 [node name="SpotLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.819692, 0.572804, 0, -0.572804, 0.819692, 0, 10.0886, 5.6622)
 
 [node name="Player" parent="." instance=ExtResource("2_7ij5n")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.77998, 2.033)
