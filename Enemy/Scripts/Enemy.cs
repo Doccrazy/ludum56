@@ -18,7 +18,12 @@ public partial class Enemy : Node
 	[Export]
 	public CharacterBody3D enemyCharacter;
 
-	public Node3D target;
+	private Node3D target;
+
+	private AnimationPlayer animationPlayer;
+
+
+	private bool isMoving = false;
 
 	// Called when the node enters the scene tree for the first time.p
 	public override void _Ready()
@@ -32,6 +37,8 @@ public partial class Enemy : Node
 
 		GD.Print("TARGET NODE: ", target);
 
+		animationPlayer = GetNode<AnimationPlayer>("CharacterBody3D/Origin/ShakeWhenMove");
+
 	}
 
 
@@ -40,7 +47,7 @@ public partial class Enemy : Node
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
-		var velocity = enemyCharacter.Velocity;
+		Vector3 velocity = enemyCharacter.Velocity;
 		// Give the enemy char some gravity
 		if (!enemyCharacter.IsOnFloor())
 		{
@@ -61,6 +68,17 @@ public partial class Enemy : Node
 		}
 
 		enemyCharacter.Velocity = velocity;
-		enemyCharacter.MoveAndSlide();
+		isMoving = enemyCharacter.MoveAndSlide();
+
+		ShakeWhenMove(1 * enemyCharacter.Velocity.Length() / 2);
+	}
+
+
+	public void ShakeWhenMove(float speed = 1)
+	{
+		if (isMoving)
+		{
+			animationPlayer.Play("Shake", -1, speed);
+		}
 	}
 }
