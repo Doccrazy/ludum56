@@ -60,6 +60,7 @@ public partial class Enemy : Node
 			var targetPos = target.GlobalPosition;
 			var enemyPos = enemyCharacter.GlobalPosition;
 
+
 			var moveVector = enemyPos.DirectionTo(targetPos);
 			var moveVelocity = moveVector * speed;
 
@@ -70,15 +71,10 @@ public partial class Enemy : Node
 		enemyCharacter.Velocity = velocity;
 		isMoving = enemyCharacter.MoveAndSlide();
 
-		ShakeWhenMove(1 * enemyCharacter.Velocity.Length() / 2);
-	}
+		var targetRotation = target.Rotation;
+		enemyCharacter.Rotation = targetRotation;
 
+		animationPlayer.Play("Shake", -1, enemyCharacter.Velocity.Length() / 2);
 
-	public void ShakeWhenMove(float speed = 1)
-	{
-		if (isMoving)
-		{
-			animationPlayer.Play("Shake", -1, speed);
-		}
 	}
 }
