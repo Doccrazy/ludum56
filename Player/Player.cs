@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Player : CharacterBody3D
+public partial class Player : CharacterBody3D, Damageable
 {
 	public const float Speed = 5.0f;
 	public const float JumpVelocity = 4.5f;
@@ -45,5 +45,10 @@ public partial class Player : CharacterBody3D
 			Transform = Transform.RotatedLocal(Vector3.Up, (float)(rotation * delta));
 		}
 		MoveAndSlide();
+	}
+
+	public void TakeDamage(int damage)
+	{
+		// TODO TAKE DAMAGE
 	}
 }

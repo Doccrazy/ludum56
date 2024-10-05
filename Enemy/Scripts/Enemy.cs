@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Enemy : Node
+public partial class Enemy : Node, Damageable
 {
 	[Export]
 	public bool isActive = false;
@@ -13,7 +13,10 @@ public partial class Enemy : Node
 	public bool isDead = false;
 
 	[Export]
-	public float damage = 10f;
+	public int damage = 10;
+
+	[Export]
+	public int life = 100;
 
 	[Export]
 	public CharacterBody3D enemyCharacter;
@@ -21,6 +24,8 @@ public partial class Enemy : Node
 	private Node3D target;
 
 	private AnimationPlayer animationPlayer;
+
+	private CollisionShape3D collisionShape3D;
 
 	// Called when the node enters the scene tree for the first time.p
 	public override void _Ready()
@@ -39,6 +44,7 @@ public partial class Enemy : Node
 		}
 
 		animationPlayer = GetNode<AnimationPlayer>("CharacterBody3D/Origin/ShakeWhenMove");
+		collisionShape3D = GetNode<CollisionShape3D>("CharacterBody3D/CollisionShape3D");
 
 	}
 
@@ -67,7 +73,6 @@ public partial class Enemy : Node
 		}
 
 		enemyCharacter.Velocity = velocity;
-		enemyCharacter.MoveAndSlide();
 
 		if (target != null)
 		{
@@ -77,5 +82,46 @@ public partial class Enemy : Node
 
 		animationPlayer.Play("Shake", -1, enemyCharacter.Velocity.Length() / 2);
 
+		enemyCharacter.MoveAndSlide();
+
+
+
+	}
+
+	public void TakeDamage(int amount)
+	{
+		if (life >= amount)
+		{
+			life -= amount;
+		}
+		else
+		{
+			life = 0;
+		}
+	}
+
+
+	public void CheckCollision()
+	{
+		var collisionCount = enemyCharacter.GetSlideCollisionCount();
+		if (collisionCount > 0)
+		{
+
+			for (int i = 0; i <= collisionCount; i++)
+			{
+				var collision = enemyCharacter.GetSlideCollision(i);
+
+				var node = collision.GetCollider();
+
+				if (node is Player)
+				{
+					var player = (Player)node;
+
+					player.TakeDamage(damage);
+				}
+
+			}
+
+		}
 	}
 }
