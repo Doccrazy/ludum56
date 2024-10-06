@@ -4,7 +4,7 @@ using Godot.Collections;
 public partial class SpawnerController : Node3D
 {
 	[Export]
-	public int MaxSpawningRate = 20;
+	public int MaxSpawningRate = 10;
 
 	[Export]
 	public PackedScene SpawnScene;
@@ -36,7 +36,7 @@ public partial class SpawnerController : Node3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (Input.IsActionPressed("spawn_debug"))
+		if (Input.IsActionJustPressed("spawn_debug"))
 		{
 			Spawn();
 		}

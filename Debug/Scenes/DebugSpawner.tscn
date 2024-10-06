@@ -39,7 +39,7 @@ material = SubResource("StandardMaterial3D_siski")
 shape = SubResource("BoxShape3D_pxftk")
 
 [node name="SpawnerController" parent="." instance=ExtResource("2_xn3f3")]
-MaxSpawningRate = 40
+MaxSpawningRate = 4
 SpawnScene = ExtResource("3_sdcur")
 
 [node name="Spawner" parent="SpawnerController" instance=ExtResource("3_jf85w")]
