@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dya1gne72jbbj"]
+
+[ext_resource type="Script" path="res://Weapons/DualRay/DualRay.cs" id="1_3xwmr"]
+[ext_resource type="PackedScene" uid="uid://bap0wm2ju1t3p" path="res://Weapons/PissEmitter/piss_emitter.tscn" id="1_hfrk1"]
+
+[node name="DualRay" type="Node3D" node_paths=PackedStringArray("Emitters")]
+script = ExtResource("1_3xwmr")
+Emitters = [NodePath("PissEmitterLeft"), NodePath("PissEmitterRight")]
+
+[node name="PissEmitterLeft" parent="." instance=ExtResource("1_hfrk1")]
+
+[node name="PissEmitterRight" parent="." instance=ExtResource("1_hfrk1")]
+transform = Transform3D(-0.999857, 0, 0.0168939, 0, 1, 0, -0.0168939, 0, -0.999857, 0, 0, 0)
