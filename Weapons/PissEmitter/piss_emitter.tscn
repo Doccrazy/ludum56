@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bap0wm2ju1t3p"]
+
+[ext_resource type="Script" path="res://Weapons/PissEmitter/PissEmitter.cs" id="1_r6r8a"]
+[ext_resource type="PackedScene" uid="uid://bxvpq4lxj2j2m" path="res://Weapons/PissEmitter/piss_particle.tscn" id="2_sll2y"]
+
+[node name="PissEmitter" type="Node3D" node_paths=PackedStringArray("EmitterNode")]
+script = ExtResource("1_r6r8a")
+PissParticleScene = ExtResource("2_sll2y")
+EmitterNode = NodePath("EmitterNode")
+
+[node name="EmitterNode" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, -0.358173, 0.933656, 1.77636e-15, 0.933656, 0.358173, -1, 1.56562e-08, -4.08114e-08, 0.225069, 0.141793, 0)
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]

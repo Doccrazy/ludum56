@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dl2ygbqrygjrq"]
 
-[ext_resource type="Script" path="res://Player/PissDecal.cs" id="1_f0iwe"]
-[ext_resource type="Texture2D" uid="uid://bbshsk5a0clae" path="res://Player/pissBlot.png" id="1_xm4jf"]
+[ext_resource type="Script" path="res://Weapons/PissEmitter/PissDecal.cs" id="1_f0iwe"]
+[ext_resource type="Texture2D" uid="uid://bbshsk5a0clae" path="res://Weapons/PissEmitter/pissBlot.png" id="1_xm4jf"]
 
 [node name="PissDecal" type="Node3D"]
 script = ExtResource("1_f0iwe")

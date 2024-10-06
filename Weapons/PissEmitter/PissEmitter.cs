@@ -5,12 +5,13 @@ public partial class PissEmitter : Node3D, IWeapon
 {
 	[Export]
 	protected PackedScene PissParticleScene;
-	private PissParticle LastEmitted;
+	[Export]
+	protected Node3D EmitterNode;
+	private PissParticle _lastEmitted;
 
-	private const float PissVelocity = 3f;
+	public const float PissVelocity = 3f;
 
-	private bool _Emitting = false;
-	public bool Emitting { get => _Emitting; set => _Emitting = value; }
+	public bool Emitting { get; set; }
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -28,25 +29,35 @@ public partial class PissEmitter : Node3D, IWeapon
 
 	public void OnTimerTimeout()
 	{
-		if (!_Emitting)
+		if (!Emitting)
 		{
-			if (LastEmitted != null)
+			if (_lastEmitted != null)
 			{
-				LastEmitted.TrailTarget = null;
-				LastEmitted = null;
+				ResetTrail();
 			}
 			return;
 		}
-		var direction = (GlobalTransform.Basis * new Vector3(0, 0, 1)).Normalized();
+		EmitParticle();
+	}
+
+	private void EmitParticle()
+	{
+		var direction = (EmitterNode.GlobalTransform.Basis * new Vector3(0, 0, 1)).Normalized();
 		var pissParticle = PissParticleScene.Instantiate<PissParticle>();
-		pissParticle.Transform = GlobalTransform;
+		pissParticle.Transform = EmitterNode.GlobalTransform;
 		pissParticle.LinearVelocity = direction * PissVelocity;
-		pissParticle.TrailTarget = this;
-		if (LastEmitted != null)
+		pissParticle.TrailTarget = EmitterNode;
+		if (_lastEmitted != null)
 		{
-			LastEmitted.TrailTarget = pissParticle;
+			_lastEmitted.TrailTarget = pissParticle;
 		}
 		GetTree().CurrentScene.AddChild(pissParticle);
-		LastEmitted = pissParticle;
+		_lastEmitted = pissParticle;
+	}
+
+	private void ResetTrail()
+	{
+		_lastEmitted.TrailTarget = null;
+		_lastEmitted = null;
 	}
 }
