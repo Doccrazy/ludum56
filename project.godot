@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Ludum56"
-run/main_scene="res://Debug/debug.tscn"
+run/main_scene="res://Debug/Scenes/debug.tscn"
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 

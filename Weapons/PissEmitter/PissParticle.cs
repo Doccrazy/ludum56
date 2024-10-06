@@ -61,10 +61,6 @@ public partial class PissParticle : RigidBody3D
 		{
 			(body as IDamageable).TakeDamage(Damage);
 		}
-		else if (body.GetParent() is IDamageable)
-		{
-			body.GetParent<IDamageable>().TakeDamage(Damage);
-		}
 		QueueFree();
 	}
 

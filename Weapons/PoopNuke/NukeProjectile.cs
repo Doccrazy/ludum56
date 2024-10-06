@@ -32,10 +32,6 @@ public partial class NukeProjectile : Node3D
 			{
 				(body as IDamageable).TakeDamage(Damage);
 			}
-			else if (body.GetParentOrNull<Node>() is IDamageable)
-			{
-				body.GetParent<IDamageable>().TakeDamage(Damage);
-			}
 		}
 		await ToSignal(GetTree().CreateTimer(2), "timeout");
 		QueueFree();
