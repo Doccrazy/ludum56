@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bp6bpuvjroqbp"]
+[gd_scene load_steps=17 format=3 uid="uid://bp6bpuvjroqbp"]
 
 [ext_resource type="PackedScene" uid="uid://dujdkmmndwmdk" path="res://Player/Player.tscn" id="1_lnb57"]
 [ext_resource type="PackedScene" uid="uid://cd8t5107s5nyj" path="res://Enemy/Scenes/Enemy.tscn" id="2_bmey0"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://gs45b4n36wre" path="res://assets/Tree1/tree_1.tscn" id="3_18h41"]
 [ext_resource type="PackedScene" uid="uid://blct5844576j8" path="res://UpgradeCrate/upgrade_crate.tscn" id="3_w6sm3"]
 [ext_resource type="PackedScene" uid="uid://5g0umkbx4ril" path="res://Weapons/PoopNuke/poop_nuke.tscn" id="4_tkn1w"]
+[ext_resource type="PackedScene" uid="uid://4tl70tv032th" path="res://Spawner/Scenes/SpawnerController.tscn" id="7_an4g7"]
+[ext_resource type="PackedScene" uid="uid://0r32ugl2ddv6" path="res://Spawner/Scenes/Spawner.tscn" id="8_1afsg"]
 
 [sub_resource type="Gradient" id="Gradient_gm5hy"]
 colors = PackedColorArray(0.384314, 0.227451, 0.0352941, 1, 0.529412, 0.756863, 0, 1)
@@ -67,9 +69,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.90313, 0.25, 3.55303)
 [node name="Tree5" parent="StaticBody3D" instance=ExtResource("3_18h41")]
 transform = Transform3D(0.7975, 0, 0.603319, 0, 1, 0, -0.603319, 0, 0.7975, 3.93472, 0.25, 3.33517)
 
-[node name="Enemy" parent="." instance=ExtResource("2_bmey0")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 1.65017, 0.292106, 0)
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.747311, 0.664474, 0, -0.664474, 0.747311, 0, 3.65009, 0)
 light_color = Color(0.980392, 1, 0.572549, 1)
@@ -83,3 +82,9 @@ ContainedWeapon = ExtResource("4_tkn1w")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_rqbff")
+
+[node name="SpawnerController" parent="." instance=ExtResource("7_an4g7")]
+SpawnScene = ExtResource("2_bmey0")
+
+[node name="Spawner" parent="SpawnerController" instance=ExtResource("8_1afsg")]
+transform = Transform3D(4.89149, 0, 0, 0, 1, 0, 0, 0, 1, -0.886332, 0.294271, -7.78288)
