@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class Enemy : Node, IDamageable
+public partial class Enemy : CharacterBody3D, IDamageable
 {
 	[Export]
 	public bool IsActive = false;
@@ -19,9 +19,6 @@ public partial class Enemy : Node, IDamageable
 	public int MaxLife { get; set; } = 100;
 
 	[Export]
-	public CharacterBody3D EnemyCharacter;
-
-	[Export]
 	public int DamageCoolDownTimeInSec = 2;
 
 	private Node3D _target;
@@ -37,11 +34,6 @@ public partial class Enemy : Node, IDamageable
 	public override void _Ready()
 	{
 		Life = MaxLife;
-		if (EnemyCharacter == null)
-		{
-			throw new System.Exception("You must assign a enemy character");
-		}
-
 		_target = GetNodeOrNull<Node3D>("%Player");
 
 		if (_target == null)
@@ -50,25 +42,25 @@ public partial class Enemy : Node, IDamageable
 			GD.PushWarning("No target node with %Player found!");
 		}
 
-		_animationPlayer = GetNode<AnimationPlayer>("CharacterBody3D/Origin/ShakeWhenMove");
-		_collisionShape3D = GetNode<CollisionShape3D>("CharacterBody3D/CollisionShape3D");
+		_animationPlayer = GetNode<AnimationPlayer>("Origin/ShakeWhenMove");
+		_collisionShape3D = GetNode<CollisionShape3D>("CollisionShape3D");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
-		Vector3 velocity = EnemyCharacter.Velocity;
+		Vector3 velocity = Velocity;
 		// Give the enemy char some gravity
-		if (!EnemyCharacter.IsOnFloor())
+		if (!IsOnFloor())
 		{
-			velocity += EnemyCharacter.GetGravity() * (float)delta;
+			velocity += GetGravity() * (float)delta;
 		}
 
 		// If an target exists then flow this target
 		if (_target != null && !IsDead)
 		{
 			var targetPos = _target.GlobalPosition;
-			var enemyPos = EnemyCharacter.GlobalPosition;
+			var enemyPos = GlobalPosition;
 
 
 			var moveVector = enemyPos.DirectionTo(targetPos);
@@ -78,15 +70,15 @@ public partial class Enemy : Node, IDamageable
 			velocity.Z = moveVelocity.Z;
 		}
 
-		EnemyCharacter.Velocity = velocity;
+		Velocity = velocity;
 
 		if (_target != null)
 		{
 			var targetRotation = _target.Rotation;
-			EnemyCharacter.Rotation = targetRotation;
+			Rotation = targetRotation;
 		}
 
-		EnemyCharacter.MoveAndSlide();
+		MoveAndSlide();
 
 		_animationPlayer.Play("Shake", -1, velocity.Length() / 2);
 
@@ -109,13 +101,13 @@ public partial class Enemy : Node, IDamageable
 
 	public void CheckCollision()
 	{
-		var collisionCount = EnemyCharacter.GetSlideCollisionCount();
+		var collisionCount = GetSlideCollisionCount();
 		if (collisionCount > 0)
 		{
 
 			for (int i = 0; i < collisionCount; i++)
 			{
-				var collision = EnemyCharacter.GetSlideCollision(i);
+				var collision = GetSlideCollision(i);
 
 				var node = collision.GetCollider();
 
