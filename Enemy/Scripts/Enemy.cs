@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class Enemy : Node, IDamageable
+public partial class Enemy : Node3D, IDamageable
 {
 	[Export]
 	public bool IsActive = false;

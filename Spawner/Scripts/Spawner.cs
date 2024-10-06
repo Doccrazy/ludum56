@@ -3,7 +3,7 @@ using Godot;
 public partial class Spawner : Node3D
 {
 	[Export]
-	public bool enabled = true;
+	public bool Enabled = true;
 
 	private CollisionShape3D _collisionShape3D;
 	private BoxShape3D _boxShape3D;
@@ -17,7 +17,7 @@ public partial class Spawner : Node3D
 
 	public void SpawnElements(PackedScene scene, int amount = 1)
 	{
-		if (!enabled)
+		if (!Enabled)
 		{
 			return;
 		}
@@ -34,11 +34,11 @@ public partial class Spawner : Node3D
 
 			Vector3 randomPosition = new Vector3(randomX, Y, randomZ);
 
-			Node3D instance = (Node3D)scene.Instantiate();
+			var instance = (Node3D)scene.Instantiate();
 
 			instance.GlobalTransform = new Transform3D(Basis.Identity, randomPosition + GlobalTransform.Origin);
 
-			GetTree().Root.AddChild(instance);
+			GetTree().Root.GetChild(0).AddChild(instance);
 
 		}
 	}
