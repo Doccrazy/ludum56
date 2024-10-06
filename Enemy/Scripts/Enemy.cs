@@ -34,7 +34,7 @@ public partial class Enemy : CharacterBody3D, IDamageable
 	public override void _Ready()
 	{
 		Life = MaxLife;
-		_target = GetNodeOrNull<Node3D>("%Player");
+		_target = (Node3D)GetTree().GetNodesInGroup("Player")[0];
 
 		if (_target == null)
 		{
