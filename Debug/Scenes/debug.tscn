@@ -41,6 +41,7 @@ sky = SubResource("Sky_40c1y")
 
 [node name="Player" parent="." groups=["Player"] instance=ExtResource("1_lnb57")]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65283, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
@@ -67,7 +68,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.90313, 0.25, 3.55303)
 transform = Transform3D(0.7975, 0, 0.603319, 0, 1, 0, -0.603319, 0, 0.7975, 3.93472, 0.25, 3.33517)
 
 [node name="Enemy" parent="." instance=ExtResource("2_bmey0")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 1.65017, 0.227323, 0)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 1.65017, 0.292106, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.747311, 0.664474, 0, -0.664474, 0.747311, 0, 3.65009, 0)
