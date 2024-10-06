@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cd8t5107s5nyj"]
+[gd_scene load_steps=8 format=3 uid="uid://cd8t5107s5nyj"]
 
 [ext_resource type="Script" path="res://Enemy/Scripts/Enemy.cs" id="1_wh4q1"]
 [ext_resource type="PackedScene" uid="uid://7egb2y02rqy1" path="res://Healthbar/healthbar.tscn" id="2_2qlkt"]
+[ext_resource type="ArrayMesh" uid="uid://cptm1yaf1xhq2" path="res://Enemy/Assets/Mesh/Gartenzwerg.res" id="2_7624g"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ypuli"]
 
@@ -65,12 +66,6 @@ _data = {
 "Shake": SubResource("Animation_kgvhk")
 }
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ey3en"]
-albedo_color = Color(0.926065, 0.0655792, 1.92523e-07, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_be3fb"]
-material = SubResource("StandardMaterial3D_ey3en")
-
 [node name="Enemy" type="CharacterBody3D"]
 collision_mask = 3
 script = ExtResource("1_wh4q1")
@@ -88,8 +83,8 @@ libraries = {
 }
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Origin"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_be3fb")
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, 0)
+mesh = ExtResource("2_7624g")
 skeleton = NodePath("../../..")
 
 [node name="Healthbar" parent="." instance=ExtResource("2_2qlkt")]
