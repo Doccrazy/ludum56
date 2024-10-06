@@ -36,10 +36,6 @@ sky_material = SubResource("ProceduralSkyMaterial_x27qu")
 [sub_resource type="Environment" id="Environment_rqbff"]
 background_mode = 2
 sky = SubResource("Sky_40c1y")
-ssr_enabled = true
-ssao_enabled = true
-sdfgi_enabled = true
-glow_enabled = true
 
 [node name="Debug" type="Node3D"]
 

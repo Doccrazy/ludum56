@@ -1,12 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://dujdkmmndwmdk"]
+[gd_scene load_steps=6 format=3 uid="uid://dujdkmmndwmdk"]
 
 [ext_resource type="Script" path="res://Player/Player.cs" id="1_f4gqq"]
 [ext_resource type="PackedScene" uid="uid://bap0wm2ju1t3p" path="res://Weapons/PissEmitter/piss_emitter.tscn" id="3_ouxuv"]
 [ext_resource type="PackedScene" uid="uid://7egb2y02rqy1" path="res://Healthbar/healthbar.tscn" id="4_3k7ej"]
+[ext_resource type="ArrayMesh" uid="uid://dveejflu3u8we" path="res://Player/Assets/Mesh/Deadpool_dog_mesh.res" id="4_iic03"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_euugb"]
-radius = 0.25
-height = 1.0
+radius = 0.42007
+height = 1.20892
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("DefaultWeapon")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.475369, 0)
@@ -15,14 +16,11 @@ script = ExtResource("1_f4gqq")
 DefaultWeapon = NodePath("PissEmitter")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.0263165, -0.999654, 0, 0.999654, -0.0263165, 0, 0, 0)
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_euugb")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3.72704, 0)
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 light_color = Color(0.982632, 0.0643041, 1, 1)
@@ -33,3 +31,7 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 0.15, 0, 0, 0, 1, 0, 0.45, 0)
 
 [node name="PissEmitter" parent="." instance=ExtResource("3_ouxuv")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, 0, 0, 0)
+mesh = ExtResource("4_iic03")
