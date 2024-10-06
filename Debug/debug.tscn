@@ -1,9 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bp6bpuvjroqbp"]
+[gd_scene load_steps=14 format=3 uid="uid://bp6bpuvjroqbp"]
 
 [ext_resource type="PackedScene" uid="uid://dujdkmmndwmdk" path="res://Player/Player.tscn" id="1_lnb57"]
 [ext_resource type="PackedScene" uid="uid://cd8t5107s5nyj" path="res://Enemy/Scenes/Enemy.tscn" id="2_bmey0"]
 [ext_resource type="PackedScene" uid="uid://blct5844576j8" path="res://UpgradeCrate/upgrade_crate.tscn" id="3_w6sm3"]
-[ext_resource type="PackedScene" uid="uid://dcqm5w5job13x" path="res://Weapons/Spreader/spreader.tscn" id="4_jx15i"]
+[ext_resource type="PackedScene" uid="uid://5g0umkbx4ril" path="res://Weapons/PoopNuke/poop_nuke.tscn" id="4_tkn1w"]
 
 [sub_resource type="Gradient" id="Gradient_gm5hy"]
 colors = PackedColorArray(0.384314, 0.227451, 0.0352941, 1, 0.529412, 0.756863, 0, 1)
@@ -21,6 +21,22 @@ albedo_texture = SubResource("NoiseTexture2D_3fr7r")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8dtfu"]
 size = Vector3(20, 0.5, 20)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vygku"]
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_88imf"]
+width = 256
+height = 256
+depth = 256
+noise = SubResource("FastNoiseLite_vygku")
+
+[sub_resource type="FogMaterial" id="FogMaterial_rp1hy"]
+density = 2.0467
+density_texture = SubResource("NoiseTexture3D_88imf")
+
+[sub_resource type="Environment" id="Environment_s3mbq"]
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
 
 [node name="Debug" type="Node3D"]
 
@@ -46,4 +62,12 @@ shadow_enabled = true
 
 [node name="UpgradeCrate" parent="." instance=ExtResource("3_w6sm3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.20304, 0.25, 1.33828)
-ContainedWeapon = ExtResource("4_jx15i")
+ContainedWeapon = ExtResource("4_tkn1w")
+
+[node name="FogVolume" type="FogVolume" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.760312, 0)
+size = Vector3(10, 1, 10)
+material = SubResource("FogMaterial_rp1hy")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_s3mbq")

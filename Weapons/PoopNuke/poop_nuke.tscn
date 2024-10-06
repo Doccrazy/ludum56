@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://5g0umkbx4ril"]
+
+[ext_resource type="Script" path="res://Weapons/PoopNuke/PoopNuke.cs" id="1_frnen"]
+[ext_resource type="PackedScene" uid="uid://i74h0amorwf5" path="res://Weapons/PoopNuke/nuke_projectile.tscn" id="2_kvgad"]
+
+[node name="PoopNuke" type="Node3D"]
+script = ExtResource("1_frnen")
+Projectile = ExtResource("2_kvgad")

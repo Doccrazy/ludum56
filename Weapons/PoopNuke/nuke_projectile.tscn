@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://i74h0amorwf5"]
+
+[ext_resource type="Script" path="res://Weapons/PoopNuke/NukeProjectile.cs" id="1_eyaqy"]
+[ext_resource type="Texture2D" uid="uid://bbshsk5a0clae" path="res://Weapons/PissEmitter/pissBlot.png" id="1_ifuj3"]
+
+[sub_resource type="Curve" id="Curve_4iupe"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.681159, 0.472527), -1.6378, -1.6378, 0, 0, Vector2(1, 0), -0.643357, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_nljb7"]
+curve = SubResource("Curve_4iupe")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_buklc"]
+direction = Vector3(0, 0, 1)
+spread = 180.0
+flatness = 1.0
+initial_velocity_min = 0.7
+initial_velocity_max = 1.0
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_nljb7")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lamc6"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.579677, 0.383017, 0.162261, 1)
+albedo_texture = ExtResource("1_ifuj3")
+
+[sub_resource type="QuadMesh" id="QuadMesh_2htas"]
+material = SubResource("StandardMaterial3D_lamc6")
+size = Vector2(0.3, 0.3)
+orientation = 1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_cepg2"]
+radius = 1.5
+
+[node name="NukeProjectile" type="Node3D"]
+script = ExtResource("1_eyaqy")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 200
+lifetime = 1.5
+one_shot = true
+preprocess = 0.1
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_buklc")
+draw_pass_1 = SubResource("QuadMesh_2htas")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_cepg2")
