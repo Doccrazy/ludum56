@@ -2,14 +2,15 @@ using Godot;
 
 using System;
 
-public partial class Player : CharacterBody3D, IDamageable
+public partial class Player : CharacterBody3D, IDamageable, IWeaponHolder
 {
 	public const float Speed = 5.0f;
 	public const float FireSpeedFactor = 0.5f;
 	public const float JumpVelocity = 4.5f;
 	public readonly float RotateSpeed = Mathf.DegToRad(-90.0f);
+	private Weapon _weapon;
 	[Export]
-	public Node Weapon; // IWeapon
+	public Weapon DefaultWeapon;
 
 	public int Life { get; private set; }
 	[Export]
@@ -18,14 +19,15 @@ public partial class Player : CharacterBody3D, IDamageable
 	public override void _Ready()
 	{
 		Life = MaxLife;
+		ResetWeapon();
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
 		var isFiring = Input.IsActionPressed("fire");
-		if (Weapon != null)
+		if (_weapon != null)
 		{
-			(Weapon as IWeapon).Emitting = isFiring;
+			_weapon.Emitting = isFiring;
 		}
 
 		Vector3 velocity = Velocity;
@@ -76,6 +78,33 @@ public partial class Player : CharacterBody3D, IDamageable
 		if (Life <= 0)
 		{
 			QueueFree();
+		}
+	}
+
+	public void SwitchWeapon(Weapon newWeapon)
+	{
+		if (_weapon != null && _weapon != DefaultWeapon)
+		{
+			_weapon.QueueFree();
+		}
+		_weapon = newWeapon;
+		if (newWeapon != DefaultWeapon)
+		{
+			AddChild(newWeapon);
+		}
+		newWeapon.Holder = this;
+	}
+
+	public void ResetWeapon()
+	{
+		if (_weapon != null && _weapon != DefaultWeapon)
+		{
+			_weapon.QueueFree();
+			_weapon = null;
+		}
+		if (DefaultWeapon != null)
+		{
+			SwitchWeapon(DefaultWeapon);
 		}
 	}
 }

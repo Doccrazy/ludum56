@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class PissEmitter : Node3D, IWeapon
+public partial class PissEmitter : Weapon
 {
 	[Export]
 	protected PackedScene PissParticleScene;
@@ -10,8 +10,6 @@ public partial class PissEmitter : Node3D, IWeapon
 	private PissParticle _lastEmitted;
 
 	public const float PissVelocity = 3f;
-
-	public bool Emitting { get; set; }
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()

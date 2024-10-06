@@ -8,11 +8,11 @@
 radius = 0.25
 height = 1.0
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("Weapon")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("DefaultWeapon")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.475369, 0)
 collision_layer = 2
 script = ExtResource("1_f4gqq")
-Weapon = NodePath("PissEmitter")
+DefaultWeapon = NodePath("PissEmitter")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.0263165, -0.999654, 0, 0.999654, -0.0263165, 0, 0, 0)

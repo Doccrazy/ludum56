@@ -1,12 +1,10 @@
 using Godot;
 using System;
 
-public partial class Spreader : Node3D, IWeapon
+public partial class Spreader : Weapon
 {
 	[Export]
 	public Node[] Emitters;
-
-	public bool Emitting { get; set; }
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -18,7 +16,7 @@ public partial class Spreader : Node3D, IWeapon
 	{
 		foreach (var emitter in Emitters)
 		{
-			(emitter as IWeapon).Emitting = Emitting;
+			(emitter as Weapon).Emitting = Emitting;
 		}
 	}
 }
