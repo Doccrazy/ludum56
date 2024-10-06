@@ -10,7 +10,7 @@ uniform float speed: hint_range(0., 10.) = 0.5;
 uniform float angle: hint_range(0., 360.) = 0.;
 
 void vertex() {
-  VERTEX.y += cos(VERTEX.x * 4.0 + TIME) * sin(VERTEX.z * 4.0 + TIME) * 0.05;
+  // VERTEX.y += cos(VERTEX.x * 4.0 + TIME) * sin(VERTEX.z * 4.0 + TIME) * 0.05;
 }
 
 void fragment() {
