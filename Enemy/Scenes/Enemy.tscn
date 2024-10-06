@@ -67,11 +67,12 @@ _data = {
 }
 
 [node name="Enemy" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, 0)
 collision_mask = 3
 script = ExtResource("1_wh4q1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.182694, 0)
 shape = SubResource("CapsuleShape3D_ypuli")
 
 [node name="Origin" type="Node3D" parent="."]
@@ -83,9 +84,9 @@ libraries = {
 }
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Origin"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, 0)
+transform = Transform3D(-0.3, 0, -4.52987e-08, 0, 0.3, 0, 4.52987e-08, 0, -0.3, 0, 0.2, 0)
 mesh = ExtResource("2_7624g")
 skeleton = NodePath("../../..")
 
 [node name="Healthbar" parent="." instance=ExtResource("2_2qlkt")]
-transform = Transform3D(5, 0, 0, 0, 0.8, 0, 0, 0, 5, 0, 1.82032, 0)
+transform = Transform3D(1.31, 0, 0, 0, 0.15, 0, 0, 0, 0.2, 0, 0.345636, 0)

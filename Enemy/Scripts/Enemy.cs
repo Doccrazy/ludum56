@@ -68,15 +68,14 @@ public partial class Enemy : CharacterBody3D, IDamageable
 
 			velocity.X = moveVelocity.X;
 			velocity.Z = moveVelocity.Z;
+
+			if (_target != null)
+			{
+				GlobalTransform = GlobalTransform.LookingAt(targetPos, Vector3.Up);
+			}
 		}
 
 		Velocity = velocity;
-
-		if (_target != null)
-		{
-			var targetRotation = _target.Rotation;
-			Rotation = targetRotation;
-		}
 
 		MoveAndSlide();
 
