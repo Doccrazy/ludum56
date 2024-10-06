@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://cd8t5107s5nyj"]
+[gd_scene load_steps=9 format=3 uid="uid://cd8t5107s5nyj"]
 
 [ext_resource type="Script" path="res://Enemy/Scripts/Enemy.cs" id="1_wh4q1"]
+[ext_resource type="PackedScene" uid="uid://7egb2y02rqy1" path="res://Healthbar/healthbar.tscn" id="2_2qlkt"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ypuli"]
 
@@ -93,3 +94,6 @@ libraries = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_be3fb")
 skeleton = NodePath("../../..")
+
+[node name="Healthbar" parent="CharacterBody3D" instance=ExtResource("2_2qlkt")]
+transform = Transform3D(5, 0, 0, 0, 0.8, 0, 0, 0, 5, 0, 1.82032, 0)

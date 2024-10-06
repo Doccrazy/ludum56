@@ -1,18 +1,18 @@
 [gd_scene load_steps=5 format=3 uid="uid://dujdkmmndwmdk"]
 
 [ext_resource type="Script" path="res://Player/Player.cs" id="1_f4gqq"]
-[ext_resource type="Script" path="res://Player/PissEmitter.cs" id="2_un6dm"]
-[ext_resource type="PackedScene" uid="uid://bxvpq4lxj2j2m" path="res://Player/piss_particle.tscn" id="3_glep1"]
+[ext_resource type="PackedScene" uid="uid://bap0wm2ju1t3p" path="res://Weapons/PissEmitter/piss_emitter.tscn" id="3_ouxuv"]
+[ext_resource type="PackedScene" uid="uid://7egb2y02rqy1" path="res://Healthbar/healthbar.tscn" id="4_3k7ej"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_euugb"]
 radius = 0.25
 height = 1.0
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("Weapon")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("DefaultWeapon")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.475369, 0)
 collision_layer = 2
 script = ExtResource("1_f4gqq")
-Weapon = NodePath("PissEmitter")
+DefaultWeapon = NodePath("PissEmitter")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.0263165, -0.999654, 0, 0.999654, -0.0263165, 0, 0, 0)
@@ -29,14 +29,7 @@ light_color = Color(0.982632, 0.0643041, 1, 1)
 light_energy = 2.454
 shadow_enabled = true
 
-[node name="PissEmitter" type="Node3D" parent="."]
-transform = Transform3D(-4.37114e-08, -0.358173, 0.933656, 1.77636e-15, 0.933656, 0.358173, -1, 1.56562e-08, -4.08114e-08, 0.225069, 0.141793, 0)
-script = ExtResource("2_un6dm")
-PissParticleScene = ExtResource("3_glep1")
+[node name="Healthbar" parent="." instance=ExtResource("4_3k7ej")]
+transform = Transform3D(1, 0, 0, 0, 0.15, 0, 0, 0, 1, 0, 0.45, 0)
 
-[node name="Timer" type="Timer" parent="PissEmitter"]
-process_callback = 0
-wait_time = 0.1
-autostart = true
-
-[connection signal="timeout" from="PissEmitter/Timer" to="PissEmitter" method="OnTimerTimeout"]
+[node name="PissEmitter" parent="." instance=ExtResource("3_ouxuv")]

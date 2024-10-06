@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://blct5844576j8"]
+
+[ext_resource type="Script" path="res://UpgradeCrate/UpgradeCrate.cs" id="1_bwekr"]
+[ext_resource type="Shader" path="res://UpgradeCrate/rainbow.gdshader" id="1_ykenh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nr40r"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aqb7k"]
+render_priority = 0
+shader = ExtResource("1_ykenh")
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[node name="UpgradeCrate" type="Node3D"]
+script = ExtResource("1_bwekr")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_nr40r")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+size = Vector3(0.5, 0.5, 0.5)
+material = SubResource("ShaderMaterial_aqb7k")
+
+[connection signal="body_entered" from="Area3D" to="." method="OnBodyEntered"]

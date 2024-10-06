@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bxvpq4lxj2j2m"]
 
-[ext_resource type="Script" path="res://Player/PissParticle.cs" id="1_58xvm"]
-[ext_resource type="PackedScene" uid="uid://dl2ygbqrygjrq" path="res://Player/piss_decal.tscn" id="2_m6ym1"]
+[ext_resource type="Script" path="res://Weapons/PissEmitter/PissParticle.cs" id="1_58xvm"]
+[ext_resource type="PackedScene" uid="uid://dl2ygbqrygjrq" path="res://Weapons/PissEmitter/piss_decal.tscn" id="2_m6ym1"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ojkma"]
 radius = 0.05
@@ -24,14 +24,14 @@ DecalScene = ExtResource("2_m6ym1")
 shape = SubResource("SphereShape3D_ojkma")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="."]
-radius = 0.05
+radius = 0.025
 material = SubResource("StandardMaterial3D_0lsgp")
 
 [node name="Trail" type="Node3D" parent="."]
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="Trail"]
 transform = Transform3D(1, 0, 0, 0, -0.00719069, -0.999974, 0, 0.999974, -0.00719069, 0, 0.0100913, -0.556073)
-radius = 0.05
+radius = 0.025
 height = 1.0
 material = SubResource("StandardMaterial3D_0lsgp")
 

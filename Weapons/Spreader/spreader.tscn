@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcqm5w5job13x"]
+
+[ext_resource type="PackedScene" uid="uid://bap0wm2ju1t3p" path="res://Weapons/PissEmitter/piss_emitter.tscn" id="1_q4u4l"]
+[ext_resource type="Script" path="res://Weapons/Spreader/Spreader.cs" id="1_sl8ty"]
+
+[node name="Spreader" type="Node3D" node_paths=PackedStringArray("Emitters")]
+script = ExtResource("1_sl8ty")
+Emitters = [NodePath("PissEmitter1"), NodePath("PissEmitter2"), NodePath("PissEmitter3")]
+
+[node name="PissEmitter1" parent="." instance=ExtResource("1_q4u4l")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 0, 0, 0)
+
+[node name="PissEmitter2" parent="." instance=ExtResource("1_q4u4l")]
+
+[node name="PissEmitter3" parent="." instance=ExtResource("1_q4u4l")]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 0, 0, 0)
