@@ -40,7 +40,7 @@ volumetric_fog_density = 0.0
 
 [node name="Debug" type="Node3D"]
 
-[node name="Player" parent="." instance=ExtResource("1_lnb57")]
+[node name="Player" parent="." groups=["Player"] instance=ExtResource("1_lnb57")]
 unique_name_in_owner = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]

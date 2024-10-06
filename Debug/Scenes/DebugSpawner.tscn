@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://2vmjbmoeat0s"]
+[gd_scene load_steps=12 format=3 uid="uid://2vmjbmoeat0s"]
 
 [ext_resource type="PackedScene" uid="uid://dujdkmmndwmdk" path="res://Player/Player.tscn" id="1_nchhl"]
-[ext_resource type="PackedScene" uid="uid://4tl70tv032th" path="res://Spawner/Scenes/SpawnerController.tscn" id="2_xn3f3"]
+[ext_resource type="PackedScene" path="res://Spawner/Scenes/SpawnerController.tscn" id="2_xn3f3"]
 [ext_resource type="PackedScene" uid="uid://0r32ugl2ddv6" path="res://Spawner/Scenes/Spawner.tscn" id="3_jf85w"]
 [ext_resource type="PackedScene" uid="uid://cd8t5107s5nyj" path="res://Enemy/Scenes/Enemy.tscn" id="3_sdcur"]
+[ext_resource type="PackedScene" uid="uid://blct5844576j8" path="res://UpgradeCrate/upgrade_crate.tscn" id="5_oitaw"]
+[ext_resource type="PackedScene" uid="uid://5g0umkbx4ril" path="res://Weapons/PoopNuke/poop_nuke.tscn" id="6_06pnf"]
 
 [sub_resource type="Gradient" id="Gradient_rs2rs"]
 colors = PackedColorArray(0.384314, 0.227451, 0.0352941, 1, 0.529412, 0.756863, 0, 1)
@@ -44,6 +46,12 @@ SpawnScene = ExtResource("3_sdcur")
 
 [node name="Spawner" parent="SpawnerController" instance=ExtResource("3_jf85w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.729, 0.5, 0)
+InstanceScale = 0.2
 
 [node name="Spawner2" parent="SpawnerController" instance=ExtResource("3_jf85w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.349, 0.5, 0)
+InstanceScale = 0.2
+
+[node name="UpgradeCrate" parent="." instance=ExtResource("5_oitaw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.265207, 2)
+ContainedWeapon = ExtResource("6_06pnf")

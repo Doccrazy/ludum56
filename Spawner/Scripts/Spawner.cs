@@ -4,6 +4,8 @@ public partial class Spawner : Node3D
 {
 	[Export]
 	public bool Enabled = true;
+	[Export]
+	public float InstanceScale = 1.0f;
 
 	private CollisionShape3D _collisionShape3D;
 	private BoxShape3D _boxShape3D;
@@ -37,6 +39,7 @@ public partial class Spawner : Node3D
 			var instance = (Node3D)scene.Instantiate();
 
 			instance.GlobalTransform = new Transform3D(Basis.Identity, randomPosition + GlobalTransform.Origin);
+			instance.Scale = new Vector3(InstanceScale, InstanceScale, InstanceScale);
 
 			GetTree().Root.GetChild(0).AddChild(instance);
 
