@@ -1,7 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://bp6bpuvjroqbp"]
+[gd_scene load_steps=16 format=3 uid="uid://bp6bpuvjroqbp"]
 
 [ext_resource type="PackedScene" uid="uid://dujdkmmndwmdk" path="res://Player/Player.tscn" id="1_lnb57"]
 [ext_resource type="PackedScene" uid="uid://cd8t5107s5nyj" path="res://Enemy/Scenes/Enemy.tscn" id="2_bmey0"]
+[ext_resource type="PackedScene" uid="uid://6dp4xi54ukl4" path="res://assets/Tree2/tree_2.tscn" id="2_wleop"]
+[ext_resource type="PackedScene" uid="uid://gs45b4n36wre" path="res://assets/Tree1/tree_1.tscn" id="3_18h41"]
 [ext_resource type="PackedScene" uid="uid://blct5844576j8" path="res://UpgradeCrate/upgrade_crate.tscn" id="3_w6sm3"]
 [ext_resource type="PackedScene" uid="uid://5g0umkbx4ril" path="res://Weapons/PoopNuke/poop_nuke.tscn" id="4_tkn1w"]
 
@@ -51,6 +53,21 @@ material = SubResource("StandardMaterial3D_5n3ci")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_8dtfu")
+
+[node name="Tree2" parent="StaticBody3D" instance=ExtResource("2_wleop")]
+transform = Transform3D(0.390667, 0, 0.920532, 0, 1, 0, -0.920532, 0, 0.390667, -0.0423748, 0.25, 2.94797)
+
+[node name="Tree3" parent="StaticBody3D" instance=ExtResource("2_wleop")]
+transform = Transform3D(0.286976, 0, 0.957938, 0, 1, 0, -0.957938, 0, 0.286976, 3.14274, 0.25, 1.15643)
+
+[node name="Tree1" parent="StaticBody3D" instance=ExtResource("3_18h41")]
+transform = Transform3D(0.685386, 0, -0.72818, 0, 1, 0, 0.72818, 0, 0.685386, -1.85838, 0.25, 3.81007)
+
+[node name="Tree4" parent="StaticBody3D" instance=ExtResource("3_18h41")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.90313, 0.25, 3.55303)
+
+[node name="Tree5" parent="StaticBody3D" instance=ExtResource("3_18h41")]
+transform = Transform3D(0.7975, 0, 0.603319, 0, 1, 0, -0.603319, 0, 0.7975, 3.93472, 0.25, 3.33517)
 
 [node name="Enemy" parent="." instance=ExtResource("2_bmey0")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 1.65017, 0.227323, 0)
