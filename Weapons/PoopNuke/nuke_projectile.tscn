@@ -14,8 +14,8 @@ curve = SubResource("Curve_4iupe")
 direction = Vector3(0, 0, 1)
 spread = 180.0
 flatness = 1.0
-initial_velocity_min = 0.7
-initial_velocity_max = 1.0
+initial_velocity_min = 1.0
+initial_velocity_max = 1.4
 gravity = Vector3(0, 0, 0)
 alpha_curve = SubResource("CurveTexture_nljb7")
 
@@ -31,7 +31,7 @@ size = Vector2(0.3, 0.3)
 orientation = 1
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_cepg2"]
-radius = 1.5
+radius = 2.0
 
 [node name="NukeProjectile" type="Node3D"]
 script = ExtResource("1_eyaqy")
