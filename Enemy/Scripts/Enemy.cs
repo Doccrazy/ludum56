@@ -88,7 +88,7 @@ public partial class Enemy : CharacterBody3D, IDamageable
 
 	public void TakeDamage(int amount)
 	{
-		if (Life >= amount)
+		if (Life > amount)
 		{
 			Life -= amount;
 		}
